@@ -1,0 +1,25 @@
+.hero{
+  background-image: url("../../assets/images/hero_background.png");
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: overlay;
+  
+  .navbar{
+    max-width: 900px;
+  }
+  .columns{
+    min-height: 100%;
+  }
+  .timer h2{
+    font-size: 10rem;
+    @include breakpoint-down(small) {
+      font-size: 6rem;
+    }
+    @include breakpoint-down(xsmall) {
+      font-size: 4rem;
+    }
+  }
+  .container.my-5{
+    background: rgba(0,0,0,0.2);
+  }
+}

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomowatch- An online pomodoro technique timer</title>
+  <meta name="title" content="Pomowatch- An online pomodoro technique timer" />
+  <meta name="description" content="Pomowatch is an online pomodoro technique timer to help track and manage your time effectively for maximum productivity" />
+  <meta name="keywords" content="pomowatch,tomato timer,pomodoro,pomofocus, pomodoro online, pomodoro timer,study timer" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pomowatch.com/" />
+  <meta property="og:title" content="Pomowatch- An online pomodoro technique timer" />
+  <meta property="og:description" content="Pomowatch is an online pomodoro technique timer to help track and manage your time effectively for maximum productivity" />
+  <meta property="og:image" content="/og-image.png" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://pomowatch.com/" />
+  <meta property="twitter:title" content="Pomowatch- An online pomodoro technique timer" />
+  <meta property="twitter:description" content="Pomowatch is an online pomodoro technique timer to help track and manage your time effectively for maximum productivity" />
+  <meta property="twitter:image" content="/og-image.png" />
+  <!-- Favicons -->
+  <link rel="icon" type="image/ico" href="/favicon.ico" />
+  <!--  Styles-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="./dist/styles.css">
+</head>
+
+<body>
+  <section class="hero is-fullheight is-primary">
+    <header>
+      <nav class="navbar is-transparent mx-auto">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="#">
+            <img src="./assets/images/logo.png" alt="Pomowatch: An easy to use pomodor technique timer" width="40" height="40">
+            <span class="is-size-4">omowatch</span>
+          </a>
+          <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div id="navbarExampleTransparentExample" class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <button data-target="settingsModal" class="button has-background-primary-light modal-button">
+                    <span class="icon">
+                      <i class="fa fa-cog"></i>
+                    </span>
+                    <span>Settings</span>
+                  </button>
+                </p>
+                <p class="control">
+                  <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet" data-social-target="https://pomowatch.com" target="_blank"
+                    href="https://twitter.com/intent/tweet?text=Pomowatch: an online pomodoro technique timer for maximum productivity&amp;hashtags=pomowatch&amp;url=https://pomowatch.com&amp;via=Pomo_watch">
+                    <span class="icon">
+                      <i class="fab fa-twitter"></i>
+                    </span>
+                    <span>
+                      Tweet
+                    </span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container my-5 px-5 is-flex is-flex-direction-column is-justify-content-space-evenly">
+      <div class="tabs is-centered mx-5 px-5 is-toggle" id="togglePomodoro">
+        <ul class="is-flex-wrap-wrap">
+          <li class="is-active" data-tab="0">
+            <a>
+              <span class="icon"><i class="fas fa-clock" aria-hidden="true"></i></span>
+              <span>Pomodoro</span>
+            </a>
+          </li>
+          <li data-tab="1">
+            <a>
+              <span class="icon"><i class="fa fa-stop" aria-hidden="true"></i></span>
+              <span>Short Break</span>
+            </a>
+          </li>
+          <li data-tab="2">
+            <a>
+              <span class="icon"><i class="fas fa-bed" aria-hidden="true"></i></span>
+              <span>Long Break</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="is-flex is-justify-content-center">
+        <div class="timer title is-size-1 has-text-weight-bold">
+          <h2 class="has-text-centered" id="timer">
+            25:00
+          </h2>
+        </div>
+      </div>
+      <div class="buttons is-flex is-justify-content-center">
+        <button class=" button is-primary is-large" id="start-stop-button">START</button>
+        <button class="button is-success is-large" id="reload-button"><i class="fa fa-undo"></i></button>
+      </div>
+    </div>
+    <div class="container is-flex is-flex-direction-column">
+      <div class="mt-2 has-text-centered">
+        <p class="is-size-5 has-text-bold" id="current-status">Time to Work!</p>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-8-desktop is-offset-2-desktop">
+          <div class="content is-size-5">
+            <h3>What's Pomowatch</h3>
+            <p>
+              Pomowatch is a lightweight, easy to use, customizable pomodoro technique timer to help you with tracking your time using the famous pomodor technique for maximum productivity.
+            </p>
+            <p>
+              We believe in making every minute of every day count. Whether working, working out or perfoming any regular task.
+            </p>
+            <h3>What is pomodoro technique</h3>
+            <p>
+              The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The technique uses a timer to break down work into intervals, traditionally 25
+              minutes in length,
+              separated by short breaks of 5 minutes and long breaks of 10 minutes at regular intervals.
+            </p>
+            <h3>Pomowatch features</h3>
+            <ol>
+              <li>Mobile first design</li>
+              <li>Customizable settings</li>
+              <li>Beatifule color themes</li>
+              <li>Fast loading</li>
+              <li>No sign up required</li>
+              <li>NO ADS</li>
+            </ol>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer has-text-centered">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-8-desktop is-offset-2-desktop">
+          <p>
+            <strong class="has-text-weight-semibold">
+              <a href="https://github.com/erickarugu/pomowatch">Pomowatch@1.0.0</a>
+            </strong>
+          </p>
+          <p>
+            <small>
+              Source code licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
+            </small>
+          </p>
+          <p style="margin-top: 1rem;">
+            <a href="http://erickarugu.com">
+              erickarugu.com
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="modal" id="settingsModal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Personal Preferences</p>
+        <button class="delete modal-button" aria-label="close" data-target="settingsModal"></button>
+      </header>
+      <form id="settingsForm">
+        <section class="modal-card-body">
+          <div class="is-flex">
+            <div class="field">
+              <label class="label">Pomodoro (mins)</label>
+              <div class="control">
+                <input class="input" type="number" name="pomodoro" value="1" min="1">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Short Break (mins)</label>
+              <div class="control">
+                <input class="input" type="number" name="short_break" value="1" min="1">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Long Break (mins)</label>
+              <div class="control">
+                <input class="input" type="number" name="long_break" value="1" min="1">
+              </div>
+            </div>
+          </div>
+          <div class="has-text-bold mt-2">
+            <div class="field mt-2">
+              <label class="label">Auto Start Pomodoros</label>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="auto_start_pomodoros" value="true">
+                  Yes
+                </label>
+                <label class="radio">
+                  <input type="radio" name="auto_start_pomodoros" value="false" checked>
+                  No
+                </label>
+              </div>
+            </div>
+            <div class="field mt-2">
+              <label class="label">Auto Start Breaks</label>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="auto_start_breaks" value="true">
+                  Yes
+                </label>
+                <label class="radio">
+                  <input type="radio" name="auto_start_breaks" value="false" checked>
+                  No
+                </label>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Long Break Interval</label>
+              <div class="control">
+                <input class="input" type="number" name="long_break_intervals" value="6" min="2">
+              </div>
+            </div>
+            <div class="field mt-2">
+              <label class="label"><span><i class="fa fa-sound"></i></span>Tick Sound</label>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="sound" value="true">
+                  Yes
+                </label>
+                <label class="radio">
+                  <input type="radio" name="sound" value="false" checked>
+                  No
+                </label>
+              </div>
+            </div>
+
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-primary modal-button" type="submit" data-target="settingsModal">Save changes</button>
+          <button class="button modal-button" data-target="settingsModal">Cancel</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+  <script src="./dist/script.js" type="module"></script>
+</body>
+
+</html>

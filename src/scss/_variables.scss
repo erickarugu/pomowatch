@@ -1,0 +1,21 @@
+
+@import "../../node_modules//bulma/sass/utilities/initial-variables";
+
+// 2. Set your own initial variables
+// Update the blue shade, used for links
+$green: #33bfb2;
+$purple: #6150f1;
+// Add orange and its invert
+$orange: #E76F51;
+$orange-invert: #fff;
+// Update the sans-serif font family
+// $family-sans-serif: "Helvetica", "Arial", sans-serif;
+
+// 3. Set the derived variables
+// Use the new pink as the primary color
+$primary: $orange;
+$info: $purple;
+$success: $green;
+$primary-invert: $orange-invert;
+
+// 4. Import the rest of Bulma
