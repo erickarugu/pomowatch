@@ -8,18 +8,24 @@ export const Timer = {};
 // Array to handle multiple timers
 Timer.timers = [];
 
-// default settings
-Timer.settings = {
-  timers: {
-    pomodoro: 25,
-    short_break: 5,
-    long_break: 10,
-  },
-  auto_start_pomodoros: false,
-  auto_start_breaks: false,
-  long_break_interval: 6,
-  sound: false
-};
+// Check if settings set in local storage
+let pomowatch_settings = localStorage.getItem('pomowatch_settings');
+if (pomowatch_settings) {
+  Timer.settings = JSON.parse(pomowatch_settings);
+} else {
+  // default settings
+  Timer.settings = {
+    timers: {
+      pomodoro: 25,
+      short_break: 5,
+      long_break: 10,
+    },
+    auto_start_pomodoros: false,
+    auto_start_breaks: false,
+    long_break_interval: 6,
+    sound: false
+  };
+}
 // Control state of the application
 Timer.controls = {
   paused: false,
@@ -39,7 +45,7 @@ Timer.saveSettings = function (formData) {
   let long_break_intervals = formData.get('long_break_intervals');
   let sound = formData.get('sound');
 
-  // TODO: validate all inputs
+  // TODO: validate all inputs before saving
 
   Timer.settings.timers = {
     pomodoro, short_break, long_break
@@ -84,7 +90,6 @@ Timer.startTimer = function (tab) {
 
   const $pomodoroTime = document.getElementById('timer');
   const $startStopBtn = document.getElementById('start-stop-button');
-  // Check settings
 
 
   let finishAudio = new Audio("../../assets/audios/door-bell.mp3");
@@ -97,6 +102,8 @@ Timer.startTimer = function (tab) {
     }
   }
   const timer = setInterval(() => {
+    // Check to ensure timer is not paused and if paused dont decrement the time
+    if (!Timer.controls.paused) time--;
     let mins = Math.floor(time / 60) < 10 ? "0" + Math.floor(time / 60) : Math.floor(time / 60);
     let secs = (time % 60) < 10 ? "0" + (time % 60) : time % 60;
     // update timer
@@ -116,7 +123,6 @@ Timer.startTimer = function (tab) {
         Timer.timerLoop(false);
       }
     };
-    if (!Timer.controls.paused) time--;
   }, 1000);
   Timer.timers.push(timer);
   $startStopBtn.innerText = "STOP";

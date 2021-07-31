@@ -1,6 +1,14 @@
 import { Timer } from './timer.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Update time on timer to match the one in settings
+  const $pomodoroTime = document.getElementById('timer');
+  let time = Timer.settings.timers.pomodoro * 60;
+  let mins = Math.floor(time / 60) < 10 ? "0" + Math.floor(time / 60) : Math.floor(time / 60);
+  let secs = (time % 60) < 10 ? "0" + (time % 60) : time % 60;
+  // update timer
+  $pomodoroTime.innerHTML = `${mins}:${secs}`;
+
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
   if ($navbarBurgers.length > 0) {
     $navbarBurgers.forEach(el => {
@@ -28,14 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (this === $pomodoroTabs[0]) {
         heroSection.classList.add('is-primary');
         currentStatusTag.innerText = 'Time to work';
+        Timer.controls.paused = false;
         Timer.timerLoop(false);
       } else if (this === $pomodoroTabs[1]) {
         heroSection.classList.add('is-success');
         currentStatusTag.innerText = 'Time to take a short break';
+        Timer.controls.paused = false;
         Timer.startTimer("short");
       } else {
         heroSection.classList.add('is-info');
         currentStatusTag.innerText = 'Time to take a long break';
+        Timer.controls.paused = false;
         Timer.startTimer("long");
       }
     });
@@ -64,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }, false);
 
   // handle pause and reload
-  const $pauseBtn = document.getElementById('start-stop-button');
-  $pauseBtn.addEventListener('click', () => {
+  const $startPauseButton = document.getElementById('start-stop-button');
+  $startPauseButton.addEventListener('click', () => {
     if (!Timer.controls.running) {
       let index = 0;
       $pomodoroTabs.forEach(tab => {
@@ -83,25 +94,34 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       Timer.controls.paused = !Timer.controls.paused;
     }
-    $pauseBtn.innerText = Timer.controls.paused ? "START" : "STOP";
+    $startPauseButton.innerText = Timer.controls.paused ? "START" : "STOP";
   }, false);
+  // handle start and stop timer using spacebar
+  document.onkeydown = function (e) {
+    e.preventDefault();
+    if (e.code === 'Space') {
+      $startPauseButton.click(); // Trigger the click event on the startPauseButton
+    }
+  };
 
-  // Reload button
+  // Handle reload button click
   const $reloadBtn = document.getElementById('reload-button');
   $reloadBtn.addEventListener('click', () => {
     let index = 0;
+    // Check the index of the active tab
     $pomodoroTabs.forEach(tab => {
       if (tab.classList.contains('is-active')) {
         index = tab.dataset.tab;
       }
     });
+    // Depending with the index call the timer
     if (index == 0) {
       Timer.timerLoop(true);
     } else if (index == 1) {
       Timer.startTimer("short");
     } else {
-      Timer.startTimer(600);
+      Timer.startTimer("long");
     }
-    $pauseBtn.innerText = Timer.controls.paused ? "START" : "STOP";
+    $startPauseButton.innerText = Timer.controls.paused ? "START" : "STOP";
   }, false);
 });
