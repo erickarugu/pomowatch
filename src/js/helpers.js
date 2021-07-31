@@ -20,14 +20,14 @@ helpers.updateDisplay = function (current_tab) {
   if (current_tab == 'pomodoro') {
     $pomodoroTabs[0].classList.add('is-active');
     heroSection.classList.add('is-primary');
-    currentStatusTag.innerText = 'Time to work';
+    currentStatusTag.innerText = 'Time to work!';
   } else if (current_tab == 'short') {
     $pomodoroTabs[1].classList.add('is-active');
     heroSection.classList.add('is-success');
-    currentStatusTag.innerText = 'Time to take a short break';
+    currentStatusTag.innerText = 'Time to take a short break!';
   } else {
     $pomodoroTabs[2].classList.add('is-active');
     heroSection.classList.add('is-info');
-    currentStatusTag.innerText = 'Time to take a long break';
+    currentStatusTag.innerText = 'Time to take a long break!';
   }
 };
